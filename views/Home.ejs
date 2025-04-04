@@ -1,0 +1,122 @@
+<h1>hi</h1><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="GoGames - Your ultimate destination for premium gaming experiences"
+    />
+    <meta
+      name="keywords"
+      content="GoGames, games, gaming, premium, experiences, download, play"
+    />
+    <meta name="author" content="Abdul Basit" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Animations.css">
+    <link rel="stylesheet" href="css/Responsive.css">
+    <link rel="icon" href="imgs/logo.jpg" />
+    <title>GoGames</title>
+
+    <script>
+      function logout() {
+        localStorage.removeItem("user");
+        window.location.href = "/signup";
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+
+        const username = JSON.parse(localStorage.getItem("user"));
+        if (username) {
+          document.getElementById("username").innerText = username.username;
+        }
+        const user = localStorage.getItem("user");
+        if (!user || !username) {
+          window.location.href = "/signup";
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="Navbar">
+      <ul class="nav-links">
+        <li class="logo" id="username">Guest</li>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+      <h1 class="animate fade-in delay-1">Welcome to GoGames</h1>
+      <p class="animate fade-in delay-2 sec-text">
+        Your ultimate destination for premium gaming experiences
+      </p>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games">
+      <h2>Featured Games</h2>
+      <div class="games-container">
+        <% if (data.length > 0) { %> <% data.forEach((game) => { %>
+        <div class="game-card">
+          <h2><%= game.title %></h2>
+          <p><%= game.description %></p>
+          <p>Engine: <%= game.engine %></p>
+          <p>Platform: <%= game.platform %></p>
+          <a href="<%= game.downloadLink %>" target="_blank">
+            <button class="download-btn">Download</button>
+          </a>
+        </div>
+        <% }) %> <% } else { %>
+        <p>No games available.</p>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 style="animation: slideInRight 0.8s ease-out forwards">About Us</h2>
+      <p style="animation: fadeIn 1s ease-out 0.3s forwards; opacity: 0">
+        Passionate Indie Developer creating immersive gaming experiences since
+        2020. We specialize in developing mid-quality games with engaging
+        gameplay.
+      </p>
+      <br />
+      <p style="animation: fadeIn 1s ease-out 0.3s forwards; opacity: 0">
+        Hello, I'm Abdul Basit, a web and game developer skilled in HTML, CSS,
+        JavaScript, C#. With experience across diverse projects, I specialize in
+        crafting innovative solutions while prioritizing efficiency, continuous
+        learning, and holistic growth.
+      </p>
+    </section>
+
+    <!-- Contributors Section -->
+    <div class="contributors">
+      <h2 class="animate slide-left">Roles</h2>
+      <p class="animate fade-in delay-1">Developer: Abdul Basit</p>
+      <p class="animate fade-in delay-2">UI/UX Designer: Abdul Basit</p>
+      <p class="animate fade-in delay-3">Music: Abdul Basit</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-links">
+        <a
+          href="https://youtube.com/@dev_looper?si=Et6rr-abkUcYyUR7"
+          target="_blank"
+          >YouTube</a
+        >
+        <a
+          href="https://www.facebook.com/profile.php?id=100072954586608&ref=ig_profile_ac"
+          target="_blank"
+          >Facebook</a
+        >
+        <a href="https://www.instagram.com/xolit_edits/" target="_blank"
+          >Instagram</a
+        >
+      </div>
+      <p>© 2025 GoGames. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
