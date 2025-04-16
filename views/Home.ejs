@@ -1,4 +1,4 @@
-<h1>hi</h1><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,37 +12,17 @@
       content="GoGames, games, gaming, premium, experiences, download, play"
     />
     <meta name="author" content="Abdul Basit" />
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/Animations.css">
-    <link rel="stylesheet" href="css/Responsive.css">
-    <link rel="icon" href="imgs/logo.jpg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/Animations.css" />
+    <link rel="stylesheet" href="css/Responsive.css" />
+    <link rel="icon" href="/imgs/logo.jpg" type="image/x-icon" />
     <title>GoGames</title>
-
-    <script>
-      function logout() {
-        localStorage.removeItem("user");
-        window.location.href = "/signup";
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-
-        const username = JSON.parse(localStorage.getItem("user"));
-        if (username) {
-          document.getElementById("username").innerText = username.username;
-        }
-        const user = localStorage.getItem("user");
-        if (!user || !username) {
-          window.location.href = "/signup";
-        }
-      });
-    </script>
   </head>
   <body>
     <!-- Navbar -->
     <nav class="Navbar">
       <ul class="nav-links">
-        <li class="logo" id="username">Guest</li>
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <li class="logo" id="username"></li>
       </ul>
     </nav>
 
@@ -91,32 +71,53 @@
       </p>
     </section>
 
-    <!-- Contributors Section -->
     <div class="contributors">
-      <h2 class="animate slide-left">Roles</h2>
-      <p class="animate fade-in delay-1">Developer: Abdul Basit</p>
-      <p class="animate fade-in delay-2">UI/UX Designer: Abdul Basit</p>
-      <p class="animate fade-in delay-3">Music: Abdul Basit</p>
+      <% if (contributors.length > 0) { %>
+      <h2 class="animate slide-left" id="roles">Roles</h2>
+      <% contributors.forEach(function(contriList) { %>
+      <p class="animate fade-in delay-1">
+        <%= contriList.role %> : <%= contriList.name %>
+      </p>
+      <% }) %> <% } %>
     </div>
 
-    <!-- Footer -->
     <footer>
+      <% if (socialLinks.length > 0) { %> <% socialLinks.forEach((scLink) => {
+      %>
       <div class="social-links">
-        <a
-          href="https://youtube.com/@dev_looper?si=Et6rr-abkUcYyUR7"
-          target="_blank"
-          >YouTube</a
-        >
-        <a
-          href="https://www.facebook.com/profile.php?id=100072954586608&ref=ig_profile_ac"
-          target="_blank"
-          >Facebook</a
-        >
-        <a href="https://www.instagram.com/xolit_edits/" target="_blank"
-          >Instagram</a
-        >
+        <a href="<%= scLink.link %>" target="_blank"> <%= scLink.title %> </a>
+        <% }) %> <% } %>
       </div>
       <p>© 2025 GoGames. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const ampm = hours >= 12 ? "PM" : "AM";
+
+      const formattedHours = hours % 12 || 12;
+      const formattedMinutes = minutes.toString().padStart(2, "0");
+
+      const currentTime = `${formattedHours}:${formattedMinutes} ${ampm}`;
+      document.getElementById("username").innerHTML = currentTime;
+
+      // Frontend JS for handling contributor roles
+      const rolesHeading = document.getElementById("roles");
+      const contributorElements = document.querySelectorAll(".contributors p");
+
+      if (rolesHeading && contributorElements.length > 0) {
+        contributorElements.forEach((element, index) => {
+          // Stagger animation by adding delay classes or inline style
+          element.style.animationDelay = `${index * 0.2}s`;
+          element.classList.add("fade-in", "animate");
+
+          // Optional: log each role for debugging
+          console.log(`Role ${index + 1}:`, element.textContent);
+        });
+      }
+    </script>
   </body>
 </html>
