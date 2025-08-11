@@ -44,9 +44,14 @@
           <p><%= game.description %></p>
           <p>Engine: <%= game.engine %></p>
           <p>Platform: <%= game.platform %></p>
-          <a href="<%= game.downloadLink %>" target="_blank">
-            <button class="download-btn">Download</button>
-          </a>
+
+          <% if (game.comingSoon === true) { %>
+            <button class="download-btn">Coming Soon</button>
+          <% } else { %>
+            <a href="<%= game.downloadLink %>" target="_blank">
+              <button class="download-btn">Download</button>
+            </a>
+          <% } %>
         </div>
         <% }) %> <% } else { %>
         <p>No games available.</p>
