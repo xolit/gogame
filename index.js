@@ -23,7 +23,6 @@ app.get("/", async (req, res) => {
     const games = await gameInfo.find();
     const scLinks = await socialLinks.find();
     const contriList = await contributors.find();
-    console.log(contriList);
     res.render("Home", {
       data: games,
       socialLinks: scLinks,
