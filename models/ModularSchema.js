@@ -15,6 +15,8 @@ const infoSchema = new mongoose.Schema({
   platform: String,
   comingSoon: Boolean,
   downloadLink: String,
+  IsWeb: Boolean,
+  WebLink: String,
 });
 const gameInfo = mongoose.model("gameInfo", infoSchema);
 
