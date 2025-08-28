@@ -51,6 +51,12 @@
             <a href="<%= game.downloadLink %>" target="_blank">
               <button class="download-btn">Download</button>
             </a>
+            <% if (game.IsWeb === true) { %>
+              <a href="<%= game.WebLink %>" target="_blank">
+                <button class="download-btn">Play Online</button>
+              </a>
+
+             <% } %>
           <% } %>
         </div>
         <% }) %> <% } else { %>
