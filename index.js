@@ -30,7 +30,7 @@ const getBaseUrl = (req) => {
   return `${protocol}://${req.get("host")}`;
 };
 
-app.get("/sitemap/sitemap.xml", (req, res) => {
+app.get("/sitemap.xml", (req, res) => {
   const baseUrl = getBaseUrl(req);
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
